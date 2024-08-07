@@ -4,25 +4,23 @@ import UpgradeMenu from './components/UpgradeMenu';
 
 function WoWClicker() {
   const [totalCurrency, setTotalCurrency] = useState(0);
-  const intervalRef = useRef(null); // Use ref to store interval ID
+  const intervalRef = useRef(null);
 
-  // Autoclicker logic
   useEffect(() => {
-    // Set up the interval only once
     intervalRef.current = setInterval(() => {
       let miningPickCount = parseInt(localStorage.getItem('miningPickCount')) || 0;
       let peonCount = parseInt(localStorage.getItem('peonCount')) || 0;
-      
-      let currencyIncrement = (miningPickCount) + (peonCount * 2);
 
-      if (currencyIncrement > 0) {
-        setTotalCurrency(prevCurrency => prevCurrency + currencyIncrement);
+      // Calculate currency increment per second
+      let currencyIncrementPerSecond = (miningPickCount / 5) + (peonCount * 2 / 5);
+
+      if (currencyIncrementPerSecond > 0) {
+        setTotalCurrency(prevCurrency => Math.floor(prevCurrency + currencyIncrementPerSecond));
       }
-    }, 5000); // 5 seconds interval
+    }, 1000); // 1 second interval
 
-    // Clear the interval on component unmount
     return () => clearInterval(intervalRef.current);
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
   return (
     <div className="App">
