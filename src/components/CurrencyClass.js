@@ -32,16 +32,26 @@ class CurrencyClass {
     handleColorChange(newSilver, newGold) {
         const currencyClickElement = document.getElementById('coin');
         const currencyAmountElement = document.getElementById('currency-amount');
+        const currencyDisplayElement = document.getElementById('currencyDisplay');
+
+        console.log(currencyClickElement);
+        console.log(currencyAmountElement);
 
         if (!currencyClickElement) {
             console.error("Element with ID 'coin' not found in the DOM.");
 
             if (newGold > 0) {
                 currencyAmountElement.style.color = '#FFD700'; // Gold
+                // set the border color of the currency display element
+                currencyDisplayElement.style.borderColor = '#FFD700'; // Gold
             } else if (newSilver > 0) {
                 currencyAmountElement.style.color = '#C0C0C0'; // Silver
+                // set the border color of the currency display element
+                currencyDisplayElement.style.borderColor = '#C0C0C0'; // Silver
             } else {
                 currencyAmountElement.style.color = '#B87333'; // Bronze (Copper)
+                // set the border color of the currency display element
+                currencyDisplayElement.style.borderColor = '#B87333'; // Bronze (Copper)
             }
 
             return;
@@ -50,12 +60,15 @@ class CurrencyClass {
         if (newGold > 0) {
             currencyClickElement.style.backgroundColor = '#FFD700'; // Gold
             currencyAmountElement.style.color = '#FFD700'; // Gold
+            currencyDisplayElement.style.borderColor = '#FFD700'; // Gold
         } else if (newSilver > 0) {
             currencyClickElement.style.backgroundColor = '#C0C0C0'; // Silver
             currencyAmountElement.style.color = '#C0C0C0'; // Silver
+            currencyDisplayElement.style.borderColor = '#C0C0C0'; // Silver
         } else {
             currencyClickElement.style.backgroundColor = '#B87333'; // Bronze (Copper)
             currencyAmountElement.style.color = '#B87333'; // Bronze (Copper)
+            currencyDisplayElement.style.borderColor = '#B87333'; // Bronze (Copper)
         }
     }
 

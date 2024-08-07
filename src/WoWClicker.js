@@ -11,10 +11,14 @@ function WoWClicker() {
     // Set up the interval only once
     intervalRef.current = setInterval(() => {
       let miningPickCount = parseInt(localStorage.getItem('miningPickCount')) || 0;
-      if (miningPickCount > 0) {
-        setTotalCurrency(prevCurrency => prevCurrency + miningPickCount);
+      let peonCount = parseInt(localStorage.getItem('peonCount')) || 0;
+      
+      let currencyIncrement = (miningPickCount) + (peonCount * 2);
+
+      if (currencyIncrement > 0) {
+        setTotalCurrency(prevCurrency => prevCurrency + currencyIncrement);
       }
-    }, 10000); // 10 seconds interval
+    }, 5000); // 5 seconds interval
 
     // Clear the interval on component unmount
     return () => clearInterval(intervalRef.current);

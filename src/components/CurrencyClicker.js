@@ -10,6 +10,7 @@ function CurrencyClicker({ totalCurrency, setTotalCurrency }) {
 
     // get number of mining picks from local storage
     let miningPickCount = parseInt(localStorage.getItem('miningPickCount')) || 0;
+    let peonCount = parseInt(localStorage.getItem('peonCount')) || 0;
 
 
     const [showUpgradeMenu, setShowUpgradeMenu] = useState(false);
@@ -54,15 +55,18 @@ function CurrencyClicker({ totalCurrency, setTotalCurrency }) {
         // Sends user to MiscMenu.js
     };
 
+    let copperPerFiveSecond = ((miningPickCount) + (peonCount * 2));
+    let copperPerSecond = copperPerFiveSecond / 5;
+    let copperText = copperPerSecond > 0 ? `+${copperPerSecond} Copper per Second` : '';
+
     return (
         <div className="currency-clicker">
-            <div className="currency-display">
+            <div className="currency-display" id="currencyDisplay">
                 <p id="currency-amount">
                     {gold} Gold, {silver} Silver, {copper} Copper
-
                     <br />
                     <sub>
-                        {miningPickCount > 0 && ` (+${miningPickCount} Copper Every 10 Seconds)`}
+                        {copperText}
                     </sub>
                 </p>
             </div>
